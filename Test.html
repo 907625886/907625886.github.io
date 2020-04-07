@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .a0 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            top: 50%;
+            left: 50%;
+          
+            transform: translate(-50%,-50%);
+        }
+        .a1 {
+            position: absolute;
+            overflow: hidden;
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+            border-radius: 50%;
+            animation: move 2s linear 0s  infinite;
+
+        }
+
+        .a2 {
+            width: 250px;
+            height: 500px;
+            background-color: black;
+            float: left;
+        }
+
+        .a3 {
+            width: 250px;
+            height: 500px;
+            background: white;
+            float: right;
+        }
+
+        .a4 {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: black;
+            border-radius: 50%;
+            left: 25%;
+
+        }
+
+        .a5 {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: white;
+            border-radius: 50%;
+            left: 25%;
+            top: 50%;
+        }
+
+        .a4-1 {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+
+        }
+        .a5-1 {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+
+        }
+        @keyframes move {
+            100% {
+            transform:rotate(360deg);
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="a0" >
+        <div class="a1">
+            <div class="a2"></div>
+            <div class="a3"></div>
+            <div class="a4">
+                <div class="a4-1"></div>
+            </div>
+            <div class="a5">
+                <div class="a5-1"></div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>
