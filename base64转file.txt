@@ -1,0 +1,31 @@
+function(base64Data) {
+    let byteString;  //声明一个字符串存储对象
+    //判断传入的参数是否是base64格式的字符串
+     if (base64Data.split(",")[0].indexOf("base64") >= 0) 
+     {   //使用 atob解码base64字符串
+        byteString = atob(base64Data.split(",")[1]);
+     } else {
+        //如若不是，就shi用unescape解码
+        byteString = unescape(base64Data.split(",")[1]);
+     }
+     let mime = base64Data //截取出转换的文件格式，也就是"image/png"
+        .split(",")[0]
+        .split(":")[1]
+        .split(";")[0];
+      let ia = new U int8 Array(byteString.length); //创建一个Uint8Array对象，长度为byteString的长度
+      
+      for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i); //读取指定位置的字符的 Unicode 编码
+      }
+      return new Blob([ia], { type: mime });//最后生成并返回 blob对象
+}
+以上base64的转换就完成了。
+最后一步，生成File对象
+
+ let file = new File([blob], "portrait.jpg", {
+  type: "image/jpeg"        
+ });
+作者：zoew
+链接：https://juejin.im/post/5e7c1324f265da42cf183a8a
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
