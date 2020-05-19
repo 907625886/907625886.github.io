@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //上传文件
+    function uploadCanvasData()
+{
+    var canvas = $('#ImageDisplay').get(0);
+    var dataUrl = canvas.toDataURL("image/jpeg");
+
+    var blob = dataURItoBlob(dataUrl);
+
+    var formData = new FormData();
+    formData.append("file", blob);
+
+    var request = new XMLHttpRequest();
+    request.onload = completeRequest;
+
+    request.open("POST", "IdentifyFood");
+    request.send(formData);
+}
+
+//base64转blob对象
+function dataURItoBlob(dataURI)
+{
+    var byteString = atob(dataURI.split(',')[1]);
+
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++)
+    {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    var bb = new Blob([ab], { "type": mimeString });
+    return bb;
+}
+</script>
+</html>
