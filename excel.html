@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            height: 100%;
+        }
+
+        #div {
+            display: none;
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #closeBtn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rebeccapurple;
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+        }
+
+        #divbox {
+            display: none;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-color: black;
+            opacity: 0.5;
+
+        }
+
+        #cv:hover #cvs {
+            height: 100%;
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+
+<body>
+<div style="height: 500px;display: flex;">
+<div style="width: 100px;position: absolute;height: 500px;"></div>
+<div style="flex: 1;"></div>
+<div style="width: 200px;"></div>
+</div>
+    <div id='div'>
+        <div id='closeBtn'>X</div>
+    </div>
+    <div id='divbox'></div>
+    <input id='file' type="file">
+    <button id='btn'>读取</button>
+
+    <script src="./xlsx.core.min.js"></script>
+    <script>
+
+        var btn = document.querySelector('#btn');
+        btn.onclick = function readWorkbookFromLocalFile() {
+            var file = document.querySelector('#file').files;
+
+            var fileSize = file[0].size;
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var data = e.target.result;
+                var workbook = XLSX.read(data, { type: 'binary' });
+                readWorkbook(workbook)
+            };
+            reader.readAsBinaryString(file[0]);
+        }
+
+
+        function readWorkbook(workbook) {
+            var sheetNames = workbook.SheetNames; // 工作表名称集合
+            var worksheet = workbook.Sheets[sheetNames[0]]; // 这里我们只读取第一张sheet
+            var csv = XLSX.utils.sheet_to_json(worksheet);
+            var txt = XLSX.utils.sheet_to_txt(worksheet);
+            var sheetObj = txt.split('\n')[0].replace(/\s+/g, " ").trim().split(" ");
+            for (let index = 0; index < csv.length; index++) {
+                sheetObj.forEach(element => {
+                    if (!csv[index][element]) {
+                        csv[index][element] = '';
+                    }
+                });
+            }
+            console.log(csv)
+        }
+
+
+
+
+        // var a=document.querySelector('ul');
+        // var li=document.createElement('li');
+
+        // console.log(a)
+        // var div = document.querySelector('#div');
+        // var divbox = document.querySelector('#divbox');
+        // var closeBtn = document.querySelector('#closeBtn');
+        // document.addEventListener('mousedown', function (e) {
+
+        //     a.insertBefore(li,a.children[0])
+        // })
+        // closeBtn.addEventListener('mousedown', function (e) {
+        //     divbox.style.display = 'none';
+        //     div.style.display = 'none'
+        //     e.stopPropagation();
+        // })
+        // var x;
+        // var y;
+        // div.addEventListener('mousedown', function (e) {
+
+        //     div.style.cursor = 'move'
+        //     x = e.pageX - div.offsetLeft;
+        //     y = e.pageY - div.offsetTop;
+
+        //     document.addEventListener('mousemove', fn)
+
+        // })
+
+        // document.addEventListener('mouseup', function () {
+        //     div.style.cursor = 'auto'
+        //     document.removeEventListener('mousemove', fn)
+        // })
+
+
+        // function fn(e) {
+
+        //     div.style.left = e.pageX - x + 'px';
+        //     div.style.top = e.pageY - y + 'px';
+
+        // }
+
+
+
+
+    </script>
+</body>
+
+</html>
