@@ -1,0 +1,4 @@
+1>全局安装webpack和webpack-cli
+2>局部安装webpack和webpack-cli
+3>创建webpack.config.js
+4>执行webpack命令
