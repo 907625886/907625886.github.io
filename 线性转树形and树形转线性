@@ -1,4 +1,4 @@
-       
+       //线性转树形
         let list = [
             { parentId: 0, id: 1, value: '1' },
            
@@ -23,3 +23,23 @@
         }
 
         console.log(listToTree(list));
+
+
+----------------------------------------------------
+
+//树形转线性
+        let res = []      
+
+        function fn(source) {
+            for (var i = 0; i < source.length; i++) {
+                let obj = {};
+                obj.name = source[i].pl_name;
+                res.push(obj)
+
+                if (source[i].children.length == 0) {
+                   
+                } else {
+                    fn(source[i].children);
+                }
+            }
+        }
