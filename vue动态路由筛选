@@ -1,0 +1,69 @@
+   const tree = [
+
+      {
+        name: 'it公司',
+        child: [
+          {
+            name: '本级公司'
+          },
+         
+          {
+            name: '行政部'
+          },
+          {
+            name: '销售部'
+          }
+        ]
+      },{
+        name: 'xx公司',
+        child: [
+          {
+            name: 'x1公司'
+          },
+         
+          {
+            name: 'x2行政部'
+          },
+          {
+            name: 'x3销售部'
+          }
+        ]
+      },{
+        name: 'xxx公司',
+        child: [
+          {
+            name: 'x1公司1'
+          },
+         
+          {
+            name: 'x2行政部2'
+          },
+          {
+            name: 'x3销售部3'
+          }
+        ]
+      }
+    ]
+   let list=['it公司','本级公司','xx公司','xxx公司','x2行政部2'];
+  console.log(filterRoutes(tree, list) )
+  
+  //将对象转化位新对象
+  function cloneObjectFn(obj) { // 对象复制
+            return JSON.parse(JSON.stringify(obj))
+    }
+        
+  function filterRoutes(tree, myRouter) {
+    let routesArr = []
+    tree.forEach(item => {
+      let a=cloneObjectFn(item);
+        if(myRouter.includes(a['name'])) {
+            if(a['child']) {
+                // 递归组合路由
+                a['child'] = filterRoutes(a['child'], myRouter)
+            }
+          
+            routesArr.push(a)
+        }
+    })
+    return routesArr
+}
