@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  
+  
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        html,body{
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        div div{
+            background: rebeccapurple;
+        }
+        .a{
+            width:300px; border: 1px solid palegreen;
+        }
+        @media screen and (max-width: 1100px) {
+  .a{
+      background: brown;
+      width: 800px;
+  }
+  
+}
+.icon {
+  width: 5em;
+  height: 5em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+  color: rgb(180,180,180  );
+}
+.icon1{
+    width: 5em;
+  height: 5em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+.icon2{
+    width: 5em;
+  height: 5em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+.icon{
+    position: absolute;
+    top:200px;
+    animation:mymove 2s infinite linear ;
+}
+.icon1{
+    position: absolute;
+    top:300px;
+    animation:mymove1 .5s infinite linear ;
+}
+.icon2{
+    position: absolute;
+    top:500px;
+    animation:mymove2 1s infinite linear ;
+}
+@keyframes mymove {
+    0%{
+     transform: rotateZ(0deg);
+    }
+    50%{
+        transform: rotateZ(180deg);
+    }
+    100%{
+        transform: rotateZ(360deg);
+    }
+}
+@keyframes mymove1 {
+    0%{
+     transform:scale(1.1);
+    }
+    50%{
+        transform: scale(.8);
+    }
+    100%{
+        transform: scale(1.1);
+    }
+}
+@keyframes mymove2 {
+    0%{
+     transform:rotateZ(0deg);
+    }
+   
+    100%{
+        transform: rotateZ(60deg);
+    }
+}
+.tt{
+  top:0px;
+  right: 0px;
+  animation:mymoves 3s linear ;
+}
+
+@keyframes mymoves {
+    0%{
+   right:-2000px
+    }
+   
+    100%{
+      right:0px;
+    }
+}
+h1{
+            position: relative;
+            font-size: 72px;
+            font-weight: 700;
+            color: #ccc;
+        }
+        h1::after{
+            content: attr(text-data);
+            position: absolute;
+             white-space: nowrap; /* 加了这行代码，禁止文字换行 */
+            top: 0;
+            left: 0;
+            background:red;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: changeColor 6s linear infinite;
+        }
+        @keyframes changeColor{
+            0%{
+                width: 0%;
+            }
+            100%{
+                width: 100%;
+            }
+        }
+
+h2{
+    font-size: 42px;
+    white-space: nowrap; /* 加了这行代码，禁止文字换行 */
+    background: url(./images/bg.jpg) center center no-repeat;
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  color:transparent;
+  animation: changeColor 6s linear infinite;
+}
+p{
+    flex: 1;
+}
+    </style>
+</head>
+<body style="overflow-x: hidden;">
+    <input type="file" class="file">
+<button class="btn">读取</button>
+    <h1 text-data="你好哇，我是南极大冰块~">你好哇，我是南极大冰块~</h1>
+    <h2>你好哇，我是南极大冰块~</h2>
+    <div class="tt" style="height: 200px;background-color: aqua;position: absolute;z-index: 11111;width:500px;"></div>
+   
+    <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-chilun"></use>
+      </svg>
+     
+    <div style="height: 100%; display: flex;justify-content: center;flex-wrap: wrap;">
+    <div  style="order:1px solid pink;min-width: 300px;flex: 1 1 auto;">1dddddddddddd</div>
+    <div  style="border:1px solid pink;flex: 1 1 auto;">2ddddddddddd</div>
+   
+    </div>
+    
+<div style="background-color: turquoise;height: 200px;margin-bottom: 300px;overflow: auto;">
+<div style="background-color: violet;width:1800px;height: 100px;margin: 50px;"></div>
+</div>
+
+<!-- 图片点击放大 -->
+<div>
+  <img height="100" width="100" src="https://cdn.pixabay.com/photo/2018/08/14/13/23/ocean-3605547_960_720.jpg" class="pic"/>
+  <img height="100" width="100" src="https://cdn.pixabay.com/photo/2011/12/14/12/21/orion-nebula-11107_960_720.jpg" class="pic"/>
+  <img height="100" width="100" src="https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_960_720.jpg" class="pic"/>
+</div>
+<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;">
+<div id="innerdiv" style="position:absolute;">
+  <img id="bigimg" style="border:5px solid #fff;" src="" />
+</div>
+<!-- 图片点击放大 -->
+
+
+    <script src="./js/iconfont.js"></script>
+    <script src="./js/jquery-1.8.3.min.js"></script>
+<script>
+
+//图片点击放大居中
+ $(function(){ 
+    $(".pic").click(function(){ 
+      var _this = $(this);//将当前的pimg元素作为_this传入函数 
+      imgShow("#outerdiv", "#innerdiv", "#bigimg", _this); 
+    }); 
+  }); 
+  function imgShow(outerdiv, innerdiv, bigimg, _this){ 
+    var src = _this.attr("src");//获取当前点击的pimg元素中的src属性 
+    $(bigimg).attr("src", src);//设置#bigimg元素的src属性 
+      /*获取当前点击图片的真实大小，并显示弹出层及大图*/ 
+    $("<img/>").attr("src", src).load(function(){ 
+      var windowW = $(window).width();//获取当前窗口宽度 
+      var windowH = $(window).height();//获取当前窗口高度 
+      var realWidth = this.width;//获取图片真实宽度 
+      var realHeight = this.height;//获取图片真实高度 
+      var imgWidth, imgHeight; 
+      var scale = 0.8;//缩放尺寸，当图片真实宽度和高度大于窗口宽度和高度时进行缩放 
+      if(realHeight>windowH*scale) {//判断图片高度 
+        imgHeight = windowH*scale;//如大于窗口高度，图片高度进行缩放 
+        imgWidth = imgHeight/realHeight*realWidth;//等比例缩放宽度 
+        if(imgWidth>windowW*scale) {//如宽度扔大于窗口宽度 
+          imgWidth = windowW*scale;//再对宽度进行缩放 
+        } 
+      } else if(realWidth>windowW*scale) {//如图片高度合适，判断图片宽度 
+        imgWidth = windowW*scale;//如大于窗口宽度，图片宽度进行缩放 
+              imgHeight = imgWidth/realWidth*realHeight;//等比例缩放高度 
+      } else {//如果图片真实高度和宽度都符合要求，高宽不变 
+        imgWidth = realWidth; 
+        imgHeight = realHeight; 
+      } 
+          $(bigimg).css("width",imgWidth);//以最终的宽度对图片缩放 
+      var w = (windowW-imgWidth)/2;//计算图片与窗口左边距 
+      var h = (windowH-imgHeight)/2;//计算图片与窗口上边距 
+      $(innerdiv).css({"top":h, "left":w});//设置#innerdiv的top和left属性 
+      $(outerdiv).fadeIn("fast");//淡入显示#outerdiv及.pimg 
+    }); 
+    $(outerdiv).click(function(){//再次点击淡出消失弹出层 
+      $(this).fadeOut("fast"); 
+    }); 
+  }
+ //--------------------
+
+
+    class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  toString() {
+   
+      this.test='gdf';
+      console.log(this.test)
+    return '(' + this.x + ', ' + this.y + ')';
+  }
+}
+var a=new Point('a','b');
+
+console.log(a.toString()) 
+
+let btn=document.querySelector('.btn');
+btn.onclick=function(){
+    let file=document.querySelector('.file');
+  let reader=new FileReader();
+  reader.readAsArrayBuffer(file.files[0]);
+            reader.onload = function (e) {
+               var DAT_data = e.target.result;
+               let blob= new Blob([DAT_data],{type:'video/mp4'});
+                let a=document.createElement('a');
+               a.download='ee'
+               a.href = window.URL.createObjectURL(blob);
+               a.click();
+            };
+
+}
+
+window.scroll({
+  left: 0,//水平方向滚动x位置
+  top: 100,//垂直方向滚动至y位置
+  behavior: 'smooth'//滚动行为：'smooth'平滑,'instant' 瞬移
+})
+    document.querySelector('.icon').addEventListener('click',function(){
+
+        $(document.body).append(` <svg class="icon1" aria-hidden="true">
+        <use xlink:href="#icon-guzhang"></use>
+      </svg>`)
+      $(document.body).append(` <svg class="icon2" aria-hidden="true">
+        <use xlink:href="#icon-guzhang1"></use>
+      </svg>`)
+    })
+    function fn2(){
+  let test = 'isboyjc'
+  return function(){
+    console.log(test)
+    return test
+  }
+}
+let fn2Child = fn2
+console.log(fn2Child())
+
+  
+</script>
+</body>
+
+</html>
+  
+  
+  
+  
